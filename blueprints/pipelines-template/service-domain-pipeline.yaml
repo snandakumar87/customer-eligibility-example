@@ -21,20 +21,4 @@ spec:
       taskRef:
         kind: Task
         name: echo-git-commit-comment
-    - name: build-backend
-      params:
-        - name: TLSVERIFY
-          value: 'false'
-        - name: MAVEN_ARGS_APPEND
-          value: '-DNEXUSREPO=http://nexus-nexus-system.apps.cluster-2d0b.green.osp.opentlc.com/repository/releases/'
-      resources:
-        inputs:
-          - name: source
-            resource: service-domain-git
-        outputs:
-          - name: image
-            resource: service-domain-image
-      taskRef:
-        kind: ClusterTask
-        name: s2i-java-11
 

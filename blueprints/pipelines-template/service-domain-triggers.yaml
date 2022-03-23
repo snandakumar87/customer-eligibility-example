@@ -2,7 +2,7 @@ apiVersion: triggers.tekton.dev/v1alpha1
 kind: TriggerTemplate
 metadata:
   name: service-domain-triggertemplate
-  namespace: pipeline
+  namespace: dm
 spec:
   params:
     - name: gitrepositoryurl
@@ -16,7 +16,7 @@ spec:
       kind: PipelineRun
       metadata:
         name: service-domain-build-$(uid)
-        namespace: pipeline
+        namespace: dm
       spec:
         serviceAccountName: pipeline
         pipelineRef:
@@ -44,7 +44,7 @@ apiVersion: triggers.tekton.dev/v1alpha1
 kind: TriggerBinding
 metadata:
   name: service-domain-pipelinebinding
-  namespace: pipeline
+  namespace: dm
 spec:
   params:
     - name: gitrevision
@@ -64,6 +64,6 @@ spec:
   serviceAccountName: pipeline
   triggers:
   - bindings:
-    - name: service-domain-pipelinebinding
+    - ref: service-domain-pipelinebinding
     template:
       name: service-domain-triggertemplate
